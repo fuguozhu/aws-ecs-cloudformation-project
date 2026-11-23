@@ -1,0 +1,43 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: >
+  Amazon ECR repository for ECS Fargate application.
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: ecs-project
+
+Resources:
+
+  ECRRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Sub '${ProjectName}-web-app'
+
+      ImageTagMutability: IMMUTABLE
+
+      ImageScanningConfiguration:
+        ScanOnPush: true
+
+      EncryptionConfiguration:
+        EncryptionType: AES256
+
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-web-app'
+
+Outputs:
+
+  RepositoryName:
+    Description: ECR Repository Name
+    Value: !Ref ECRRepository
+
+  RepositoryUri:
+    Description: ECR Repository URI
+    Value: !GetAtt ECRRepository.RepositoryUri
+
+  RepositoryArn:
+    Description: ECR Repository ARN
+    Value: !GetAtt ECRRepository.Arn
