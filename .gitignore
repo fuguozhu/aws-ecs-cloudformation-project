@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Environment variables
+.env
+.env.*
+
+# AWS credentials
+.aws/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
